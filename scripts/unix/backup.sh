@@ -86,6 +86,20 @@ detect_codex_path() {
     fi
 }
 
+# 解析参数
+CUSTOM_MESSAGE=""
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --message|-m)
+            CUSTOM_MESSAGE="$2"
+            shift 2
+            ;;
+        *)
+            shift
+            ;;
+    esac
+done
+
 echo "📦 开始备份 OpenClaw 配置..."
 
 # 检查依赖
@@ -191,7 +205,11 @@ fi
 # 提交到 Git
 echo "  → 提交到 Git..."
 git add -A
-git commit -m "Backup $(date '+%Y-%m-%d %H:%M:%S')" || echo "  ℹ️  没有变化"
+if [ -n "$CUSTOM_MESSAGE" ]; then
+    git commit -m "Backup $(date '+%Y-%m-%d %H:%M:%S') - $CUSTOM_MESSAGE" || echo "  ℹ️  没有变化"
+else
+    git commit -m "Backup $(date '+%Y-%m-%d %H:%M:%S')" || echo "  ℹ️  没有变化"
+fi
 
 # 推送到 GitHub
 echo "  → 推送到 GitHub..."

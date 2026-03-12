@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0] - 2026-03-12
+
+### Added
+- 自定义备份描述功能
+- 支持 `--message` 参数添加备份说明
+- AI 自动识别用户意图并添加描述（如"更新前备份"）
+- 历史记录显示自定义描述
+
+### Changed
+- 优化 README 文档结构
+- 添加安全备份恢复详细说明
+
 ## [1.2.2] - 2026-03-12
 
 ### Fixed

@@ -91,17 +91,22 @@ bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/unix/init.sh \
 **通过 AI 对话（推荐）**
 
 直接对 OpenClaw 说：
-- "备份" 或 "执行备份" - 执行备份
+- "备份" 或 "执行备份" - 普通备份
+- "更新前备份一下" - 带描述的备份（历史中显示"更新前的备份"）
+- "测试前先备份" - 带描述的备份（历史中显示"测试前的备份"）
 - "备份状态" 或 "查看备份状态" - 查看状态
-- "备份历史" - 查看历史记录
+- "备份历史" - 查看历史记录（包含自定义描述）
 - "恢复配置" - 恢复（会先警告风险）
 
 **通过命令行**
 
 **执行备份**
 ```bash
-# 自动选择脚本（推荐）
+# 普通备份
 ~/.openclaw/workspace/skills/openclaw-backup-skill/backup
+
+# 带自定义描述的备份
+bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/unix/backup.sh --message "更新前的备份"
 ```
 
 **查看状态**

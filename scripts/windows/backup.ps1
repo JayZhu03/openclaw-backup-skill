@@ -1,6 +1,10 @@
 # OpenClaw Backup Script for Windows
 # PowerShell version
 
+param(
+    [string]$Message = ""
+)
+
 $ErrorActionPreference = "Stop"
 
 $CONFIG_DIR = "$env:USERPROFILE\.openclaw-backup"
@@ -97,7 +101,11 @@ if ($config.backup_items.codex.enabled) {
 Write-Info "提交到 Git..."
 git add -A
 $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-git commit -m "Backup $timestamp"
+if ($Message) {
+    git commit -m "Backup $timestamp - $Message"
+} else {
+    git commit -m "Backup $timestamp"
+}
 
 Write-Info "推送到 GitHub..."
 git push -u origin $BRANCH

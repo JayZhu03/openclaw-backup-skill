@@ -190,14 +190,29 @@ bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/init.sh \
 
 ### 执行备份
 
+**AI 识别自定义描述：**
+
+当用户说以下内容时，AI 应识别并添加自定义描述：
+- "更新前备份一下" → `--message "更新前的备份"`
+- "测试前先备份" → `--message "测试前的备份"`
+- "重要修改前备份" → `--message "重要修改前的备份"`
+
 **Linux/macOS：**
 ```bash
+# 普通备份
 bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/unix/backup.sh
+
+# 带自定义描述的备份
+bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/unix/backup.sh --message "更新前的备份"
 ```
 
 **Windows：**
 ```powershell
+# 普通备份
 powershell ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/windows/backup.ps1
+
+# 带自定义描述的备份
+powershell ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/windows/backup.ps1 -Message "更新前的备份"
 ```
 
 **自动选择（推荐）：**
@@ -207,6 +222,8 @@ powershell ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/windows/ba
 
 自动完成：
 - 脱敏敏感信息
+- 提交到 Git（包含自定义描述）
+- 推送到 GitHub
 - 提交到 Git
 - 推送到 GitHub
 
