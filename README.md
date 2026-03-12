@@ -1,35 +1,38 @@
 # OpenClaw Backup Skill
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Version](https://img.shields.io/badge/version-1.2.1-blue.svg)](https://github.com/JayZhu03/openclaw-backup-skill)
+
 自动备份 OpenClaw 配置到 GitHub 私有仓库，支持版本管理和一键恢复。
 
-## 功能特性
+## ✨ 功能特性
 
-- ✅ 自动脱敏敏感信息（Token、API Key、密钥等）
-- ✅ 支持多系统（Linux / macOS / Windows）
-- ✅ 版本管理（查看历史、回滚到任意版本）
-- ✅ 灵活配置（可选备份项）
-- ✅ 定时自动备份（可选 cron）
+- 🔒 **自动脱敏** - 敏感信息（Token、API Key）自动脱敏
+- 🌍 **跨平台支持** - Linux、macOS、Windows 原生支持
+- 📦 **版本管理** - 完整的 Git 历史记录，支持回滚到任意版本
+- ⚙️ **灵活配置** - 可选备份项，按需启用
+- 🤖 **AI 引导** - 聊天式配置，无需手动编辑
+- ⏰ **定时备份** - 可选 cron 自动备份（Linux/macOS）
 
-## 系统要求
+## 📋 系统要求
 
 ### Linux / macOS
 - Bash 4.0+
 - Git 2.0+
+- rsync
 - 已配置 GitHub SSH key
 
 ### Windows
 - PowerShell 5.0+（Windows 10+ 自带）
 - Git 2.0+
 - 已配置 GitHub SSH key
-- **注意：脚本会自动使用 PowerShell 版本，无需 WSL 或 Git Bash**
 
-## 快速开始
+## 🚀 快速开始
 
 ### 1. 安装
 
 **方式 1：通过 OpenClaw AI 安装（推荐）**
 
-对 OpenClaw 说：
 ```
 请安装 https://github.com/JayZhu03/openclaw-backup-skill 这个 skill
 ```
@@ -42,9 +45,7 @@ git clone https://github.com/JayZhu03/openclaw-backup-skill.git ~/.openclaw/work
 
 ### 2. 初始化
 
-有三种初始化方式，选择最适合你的：
-
-**方式 1：AI 引导配置（推荐，适合聊天软件用户）**
+**方式 1：AI 引导配置（推荐）**
 
 对 OpenClaw 说：
 ```
@@ -53,102 +54,137 @@ git clone https://github.com/JayZhu03/openclaw-backup-skill.git ~/.openclaw/work
 需要备份 Claude Code 和 Codex
 ```
 
-AI 会自动生成配置文件，无需手动操作。
-
-**方式 2：交互式向导（适合终端用户）**
+**方式 2：交互式向导**
 
 ```bash
-bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/init.sh
+# Linux/macOS
+bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/unix/init.sh
+
+# Windows
+powershell ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/windows/init.ps1
 ```
 
-按照提示输入配置信息。
-
-**方式 3：命令行参数（适合脚本调用）**
+**方式 3：命令行参数**
 
 ```bash
-bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/init.sh \
+bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/unix/init.sh \
   --repo "git@github.com:username/repo.git" \
   --claude-code yes \
   --codex yes \
-  --auto-backup no \
   --non-interactive
 ```
 
-### 3. 备份
+### 3. 使用
 
+**执行备份**
 ```bash
-# 手动备份
-bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/backup.sh
+# 自动选择脚本（推荐）
+~/.openclaw/workspace/skills/openclaw-backup-skill/backup
 
-# 查看状态
-bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/status.sh
+# 或直接对 OpenClaw 说："备份"
 ```
 
-### 4. 恢复
-
+**查看状态**
 ```bash
-# 查看历史版本
-bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/history.sh
-
-# 恢复到最新备份
-bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/restore.sh --all
-
-# 回滚到指定版本
-bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/rollback.sh <commit-hash>
+~/.openclaw/workspace/skills/openclaw-backup-skill/status
 ```
 
-## 备份内容
+**查看历史**
+```bash
+~/.openclaw/workspace/skills/openclaw-backup-skill/history
+```
 
-### 默认备份
+**恢复配置**
+```bash
+~/.openclaw/workspace/skills/openclaw-backup-skill/restore
+```
+
+## 📦 备份内容
+
+### 默认备份（必选）
 - ✅ OpenClaw 主配置 (`~/.openclaw/openclaw.json`)
 - ✅ Workspace 工作空间 (`~/.openclaw/workspace/`)
 
-### 可选备份（按需启用）
+### 可选备份
 - ⬜ Claude Code 配置 (`~/.claude/`)
 - ⬜ Codex 配置 (`~/.codex/`)
 - ⬜ systemd 服务文件（仅 Linux）
 
 编辑 `~/.openclaw-backup/config.json` 启用可选项。
 
-## 配置文件
+## ⚙️ 配置文件
 
 配置文件位于 `~/.openclaw-backup/`：
 
-- `config.json` - 备份配置（仓库地址、备份项等）
-- `desensitize.json` - 脱敏规则（可自定义）
+- **config.json** - 备份配置（仓库地址、备份项等）
+- **desensitize.json** - 脱敏规则（可自定义）
 
-## 常见问题
+### 示例配置
+
+```json
+{
+  "repository": "git@github.com:username/openclaw-backup.git",
+  "branch": "main",
+  "backup_items": {
+    "openclaw_config": { "enabled": true },
+    "workspace": { "enabled": true },
+    "claude_code": { "enabled": false },
+    "codex": { "enabled": false }
+  }
+}
+```
+
+## 🔧 常见问题
 
 ### Q: Windows 用户如何使用？
-A: Windows 用户使用 PowerShell 脚本，无需 WSL 或 Git Bash：
+A: Windows 用户使用 PowerShell 脚本，无需 WSL：
 - 直接运行：`powershell scripts\windows\backup.ps1`
-- 或使用包装脚本：`.\backup`（自动选择 PowerShell 版本）
-- 路径使用 Windows 风格（`C:\Users\...`）
+- 或使用包装脚本：`.\backup`（自动选择）
 - 需要 PowerShell 5.0+（Windows 10+ 自带）
 
-### Q: 如果 OpenClaw/Claude Code/Codex 安装路径不是默认路径怎么办？
+### Q: 如果安装路径不是默认路径怎么办？
 A: 脚本会自动检测常见路径，如果检测失败：
 1. 手动编辑 `~/.openclaw-backup/config.json`
 2. 修改对应项的 `path` 字段为实际路径
-3. 例如：`"path": "/custom/path/to/openclaw.json"`
 
 ### Q: 如何配置自动备份？
-A: 运行 `init.sh` 时选择配置 cron，或手动添加到 crontab。
+A: Linux/macOS 用户可以配置 cron：
+```bash
+# 每天凌晨 2:00 自动备份
+0 2 * * * bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/unix/backup.sh
+```
 
 ### Q: 备份失败怎么办？
-A: 检查 SSH key 配置、网络连接、Git 仓库权限。
+A: 检查以下项目：
+- SSH key 是否配置正确
+- 网络连接是否正常
+- Git 仓库权限是否正确
+- 是否有嵌套的 Git 仓库（已自动排除）
 
 ### Q: 如何自定义脱敏规则？
-A: 编辑 `~/.openclaw-backup/desensitize.json`。
+A: 编辑 `~/.openclaw-backup/desensitize.json`，添加自定义规则。
 
-## 开源协议
+## 🛡️ 安全建议
+
+- ⚠️ **必须使用私有仓库** - 备份包含敏感信息
+- 🔑 **使用 SSH 密钥** - 避免在配置中存储密码
+- 🔒 **定期检查脱敏规则** - 确保敏感信息被正确处理
+- 📝 **审查备份内容** - 首次备份后检查 GitHub 仓库
+
+## 📄 开源协议
 
 MIT License - 详见 [LICENSE](LICENSE)
 
-## 贡献
+## 🤝 贡献
 
 欢迎提交 Issue 和 Pull Request！
 
-## 作者
+## 👤 作者
 
-JayZhu03
+[JayZhu03](https://github.com/JayZhu03)
+
+## 🔗 相关链接
+
+- [GitHub 仓库](https://github.com/JayZhu03/openclaw-backup-skill)
+- [问题反馈](https://github.com/JayZhu03/openclaw-backup-skill/issues)
+- [更新日志](CHANGELOG.md)

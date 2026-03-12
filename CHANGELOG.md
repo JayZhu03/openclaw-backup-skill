@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.1] - 2026-03-12
+
+### Fixed
+- Windows 版本排除 `.git` 目录，避免嵌套 Git 仓库冲突
+- 修复 Claude Code 插件缓存导致的备份失败问题
+- 使用 robocopy 优化 Windows 文件复制性能
+
 ## [1.2.0] - 2026-03-12
 
 ### Added
