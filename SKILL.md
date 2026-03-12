@@ -98,8 +98,6 @@ AI 直接生成配置文件，无需交互。
 
 ### 方式 2: 交互式向导（适合终端）
 
-### 方式 2: 交互式向导（适合终端）
-
 ```bash
 bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/init.sh
 ```
@@ -234,14 +232,7 @@ bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/rollback.sh <com
     然后修改配置
 ```
 
-**场景 2：配置炸了需要恢复**
-```
-用户: "Gateway 启动失败了，帮我恢复配置"
-你: 执行恢复...
-    bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/restore.sh --all
-```
-
-**场景 3：查看备份历史**
+**场景 2：查看备份历史**
 ```
 用户: "我想看看之前的备份版本"
 你: bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/history.sh
