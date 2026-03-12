@@ -63,7 +63,8 @@ git clone https://github.com/JayZhu03/openclaw-backup-skill.git ~/.openclaw/work
 ```
 帮我初始化 openclaw-backup，
 仓库地址是 git@github.com:你的用户名/仓库名.git，
-需要备份 Claude Code 和 Codex
+不需要备份 Claude Code 和 Codex，
+不需要定时任务
 ```
 
 **方式 2：交互式向导**
