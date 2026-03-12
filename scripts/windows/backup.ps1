@@ -1,4 +1,4 @@
-# OpenClaw Backup Script for Windows
+﻿# OpenClaw Backup Script for Windows
 # PowerShell version
 
 param(

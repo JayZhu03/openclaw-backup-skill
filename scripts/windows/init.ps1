@@ -1,4 +1,4 @@
-# OpenClaw Backup Init Script for Windows
+﻿# OpenClaw Backup Init Script for Windows
 # PowerShell version
 
 $ErrorActionPreference = "Stop"

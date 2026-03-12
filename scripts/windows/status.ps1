@@ -1,4 +1,4 @@
-# OpenClaw Backup Status Script for Windows
+﻿# OpenClaw Backup Status Script for Windows
 # PowerShell version
 
 $CONFIG_DIR = "$env:USERPROFILE\.openclaw-backup"

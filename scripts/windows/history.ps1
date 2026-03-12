@@ -1,4 +1,4 @@
-# OpenClaw Backup History Script for Windows
+﻿# OpenClaw Backup History Script for Windows
 # PowerShell version
 
 $BACKUP_DIR = "$env:USERPROFILE\openclaw-backup"

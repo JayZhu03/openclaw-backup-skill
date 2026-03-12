@@ -1,4 +1,4 @@
-# OpenClaw Backup Rollback Script for Windows
+﻿# OpenClaw Backup Rollback Script for Windows
 # PowerShell version
 
 param(
