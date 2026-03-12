@@ -1,9 +1,9 @@
-# OpenClaw Backup Skill
-
 ---
 name: openclaw-backup-skill
 description: "自动备份 OpenClaw 配置到 GitHub 私有仓库，支持版本管理、一键恢复和自定义备份描述。跨平台支持 Linux/macOS/Windows。使用场景：'备份配置'、'恢复配置'、'更新前备份'、'查看备份历史'、'回滚到指定版本'。"
 ---
+
+# OpenClaw Backup Skill
 
 自动备份 OpenClaw 配置到 GitHub 私有仓库，支持版本管理、一键恢复和自定义备份描述。
 
