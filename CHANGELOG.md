@@ -9,10 +9,18 @@ All notable changes to this project will be documented in this file.
 - 支持 `--message` 参数添加备份说明
 - AI 自动识别用户意图并添加描述（如"更新前备份"）
 - 历史记录显示自定义描述
+- 添加 frontmatter 元数据到 SKILL.md
+- 添加 references/ 目录（安全最佳实践、故障排除）
 
 ### Changed
 - 优化 README 文档结构
 - 添加安全备份恢复详细说明
+- 精简 SKILL.md，移除冗余章节
+- 更新初始化示例（推荐最小化备份）
+
+### Fixed
+- 修复 rollback 缺少警告的问题
+- 添加 rollback 的 AI 确认机制
 
 ## [1.2.2] - 2026-03-12
 
