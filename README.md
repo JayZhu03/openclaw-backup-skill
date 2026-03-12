@@ -119,7 +119,16 @@ bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/rollback.sh <com
 ## 常见问题
 
 ### Q: Windows 用户如何使用？
-A: 必须使用 Git Bash 或 WSL，路径使用 Unix 风格。
+A: 必须使用 Git Bash 或 WSL。在 Git Bash 中：
+- 路径使用 Unix 风格（`/c/Users/...` 而不是 `C:\Users\...`）
+- 运行脚本：`bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/backup.sh`
+- 注意：Windows 环境未经充分测试，可能存在兼容性问题
+
+### Q: 如果 OpenClaw/Claude Code/Codex 安装路径不是默认路径怎么办？
+A: 脚本会自动检测常见路径，如果检测失败：
+1. 手动编辑 `~/.openclaw-backup/config.json`
+2. 修改对应项的 `path` 字段为实际路径
+3. 例如：`"path": "/custom/path/to/openclaw.json"`
 
 ### Q: 如何配置自动备份？
 A: 运行 `init.sh` 时选择配置 cron，或手动添加到 crontab。
