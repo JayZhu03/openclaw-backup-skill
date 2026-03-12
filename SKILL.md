@@ -3,24 +3,121 @@
 ## 触发条件
 
 当用户提到以下关键词时使用此 skill：
-- "备份配置"、"backup"、"创建备份"
+- "备份配置"、"backup"、"创建备份"、"初始化备份"
 - "恢复配置"、"restore"、"回滚"
 - "查看备份历史"、"backup history"
 - 修改 openclaw.json 等核心配置前
 
+## AI 引导式配置（推荐）
+
+当用户说"初始化 openclaw-backup" 或 "配置备份"时，使用以下流程：
+
+### 步骤 1: 收集信息
+
+询问用户以下问题：
+
+1. **GitHub 仓库地址？**
+   - 格式：`git@github.com:username/repo.git`（SSH）或 `https://github.com/username/repo.git`（HTTPS）
+   - 建议使用 SSH 格式
+
+2. **需要备份哪些内容？**
+   - OpenClaw 配置（必选）
+   - Workspace 工作空间（必选）
+   - Claude Code 配置（可选）
+   - Codex 配置（可选）
+   - systemd 服务文件（可选，仅 Linux）
+
+3. **是否需要自动备份？**
+   - 不需要
+   - 每天凌晨 2:00
+   - 每周日凌晨 2:00
+
+### 步骤 2: 生成配置
+
+根据用户回答，直接生成配置文件：
+
+```bash
+mkdir -p ~/.openclaw-backup
+
+# 创建配置文件
+cat > ~/.openclaw-backup/config.json <<'EOF'
+{
+  "repository": "用户提供的仓库地址",
+  "branch": "main",
+  "backup_items": {
+    "openclaw_config": {"enabled": true, "path": "~/.openclaw/openclaw.json", "required": true},
+    "workspace": {"enabled": true, "path": "~/.openclaw/workspace/", "required": true},
+    "claude_code": {"enabled": false, "path": "~/.claude/", "required": false},
+    "codex": {"enabled": false, "path": "~/.codex/", "required": false},
+    "systemd": {"enabled": false, "path": "~/.config/systemd/user/openclaw-*.service", "required": false}
+  },
+  "desensitize": {"enabled": true, "rules_file": "~/.openclaw-backup/desensitize.json"},
+  "git": {"auto_commit": true, "auto_push": true}
+}
+EOF
+
+# 复制脱敏规则
+cp ~/.openclaw/workspace/skills/openclaw-backup-skill/examples/desensitize.example.json ~/.openclaw-backup/desensitize.json
+```
+
+### 步骤 3: 配置 cron（可选）
+
+如果用户选择自动备份：
+
+```bash
+# 每天凌晨 2:00
+(crontab -l 2>/dev/null | grep -v "openclaw-backup"; echo "0 2 * * * bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/backup.sh") | crontab -
+
+# 或每周日凌晨 2:00
+(crontab -l 2>/dev/null | grep -v "openclaw-backup"; echo "0 2 * * 0 bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/backup.sh") | crontab -
+```
+
+### 步骤 4: 完成提示
+
+告诉用户：
+```
+✅ 配置完成！
+
+下一步：
+1. 执行首次备份：bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/backup.sh
+2. 查看状态：bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/status.sh
+
+配置文件位置：~/.openclaw-backup/config.json
+如需修改，可以直接编辑该文件。
+```
+
+---
+
 ## 使用方法
 
-### 初始化（首次使用）
+### 方式 1: AI 引导配置（推荐，适合聊天软件）
+
+用户说："帮我初始化 openclaw-backup，仓库是 git@github.com:xxx/xxx.git，需要备份 Claude Code"
+
+AI 直接生成配置文件，无需交互。
+
+### 方式 2: 交互式向导（适合终端）
+
+### 方式 2: 交互式向导（适合终端）
 
 ```bash
 bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/init.sh
 ```
 
-引导用户完成：
-1. GitHub 仓库配置
-2. SSH key 验证
-3. 可选备份项选择
-4. 自动备份设置（可选）
+### 方式 3: 命令行参数（适合脚本调用）
+
+```bash
+bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/init.sh \
+  --repo "git@github.com:username/repo.git" \
+  --claude-code yes \
+  --codex no \
+  --auto-backup no \
+  --non-interactive
+```
+
+---
+
+## 核心功能
 
 ### 执行备份
 
