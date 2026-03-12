@@ -1,0 +1,45 @@
+{
+  "repository": "git@github.com:username/openclaw-backup.git",
+  "branch": "main",
+  "backup_items": {
+    "openclaw_config": {
+      "enabled": true,
+      "path": "~/.openclaw/openclaw.json",
+      "required": true
+    },
+    "workspace": {
+      "enabled": true,
+      "path": "~/.openclaw/workspace/",
+      "required": true,
+      "exclude": ["node_modules", "*.log", ".DS_Store", "skills"]
+    },
+    "systemd": {
+      "enabled": true,
+      "path": "~/.config/systemd/user/openclaw-*.service",
+      "required": false,
+      "os": ["Linux"]
+    },
+    "claude_code": {
+      "enabled": false,
+      "path": "~/.claude/",
+      "required": false,
+      "description": "Claude Code configuration (optional)"
+    },
+    "codex": {
+      "enabled": false,
+      "path": "~/.codex/",
+      "required": false,
+      "description": "Codex configuration (optional)"
+    }
+  },
+  "desensitize": {
+    "enabled": true,
+    "rules_file": "~/.openclaw-backup/desensitize.json"
+  },
+  "git": {
+    "auto_commit": true,
+    "commit_message_prefix": "Backup",
+    "auto_push": true,
+    "push_retry": 3
+  }
+}

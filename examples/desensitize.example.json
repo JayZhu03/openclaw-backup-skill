@@ -1,0 +1,34 @@
+{
+  "rules": [
+    {
+      "name": "Telegram Bot Token",
+      "pattern": "\"token\":\\s*\"[0-9]+:[A-Za-z0-9_-]+\"",
+      "replacement": "\"token\": \"<REDACTED_TELEGRAM_TOKEN>\""
+    },
+    {
+      "name": "OpenAI API Key",
+      "pattern": "\"apiKey\":\\s*\"sk-[A-Za-z0-9]+\"",
+      "replacement": "\"apiKey\": \"<REDACTED_OPENAI_KEY>\""
+    },
+    {
+      "name": "Anthropic API Key",
+      "pattern": "\"apiKey\":\\s*\"sk-ant-[A-Za-z0-9_-]+\"",
+      "replacement": "\"apiKey\": \"<REDACTED_ANTHROPIC_KEY>\""
+    },
+    {
+      "name": "SSH Private Key Path",
+      "pattern": "\"sshKeyPath\":\\s*\"[^\"]+\"",
+      "replacement": "\"sshKeyPath\": \"<REDACTED_SSH_KEY_PATH>\""
+    },
+    {
+      "name": "Webhook URL",
+      "pattern": "\"webhookUrl\":\\s*\"https?://[^\"]+\"",
+      "replacement": "\"webhookUrl\": \"<REDACTED_WEBHOOK_URL>\""
+    },
+    {
+      "name": "Database Password",
+      "pattern": "\"password\":\\s*\"[^\"]+\"",
+      "replacement": "\"password\": \"<REDACTED_PASSWORD>\""
+    }
+  ]
+}
