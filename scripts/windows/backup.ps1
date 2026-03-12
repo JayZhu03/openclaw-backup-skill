@@ -59,12 +59,19 @@ if ($config.backup_items.openclaw_config.enabled) {
     }
 }
 
+# Helper function to copy excluding .git
+function Copy-ExcludeGit {
+    param($Source, $Destination)
+    robocopy $Source $Destination /E /XD .git node_modules /XF *.log .DS_Store /NFL /NDL /NJH /NJS /nc /ns /np
+    if ($LASTEXITCODE -le 7) { $LASTEXITCODE = 0 }
+}
+
 # Backup workspace
 if ($config.backup_items.workspace.enabled) {
     Write-Info "备份 workspace..."
     $workspacePath = "$env:USERPROFILE\.openclaw\workspace"
     if (Test-Path $workspacePath) {
-        Copy-Item -Recurse -Force "$workspacePath\*" "$BACKUP_DIR\workspace-files\" -Exclude @("node_modules", "*.log", ".DS_Store", "skills")
+        Copy-ExcludeGit $workspacePath "$BACKUP_DIR\workspace-files"
     }
 }
 
@@ -73,7 +80,7 @@ if ($config.backup_items.claude_code.enabled) {
     Write-Info "备份 Claude Code 配置..."
     $claudePath = "$env:USERPROFILE\.claude"
     if (Test-Path $claudePath) {
-        Copy-Item -Recurse -Force $claudePath "$BACKUP_DIR\config-files\claude\"
+        Copy-ExcludeGit $claudePath "$BACKUP_DIR\config-files\claude"
     }
 }
 
@@ -82,7 +89,7 @@ if ($config.backup_items.codex.enabled) {
     Write-Info "备份 Codex 配置..."
     $codexPath = "$env:USERPROFILE\.codex"
     if (Test-Path $codexPath) {
-        Copy-Item -Recurse -Force $codexPath "$BACKUP_DIR\config-files\codex\"
+        Copy-ExcludeGit $codexPath "$BACKUP_DIR\config-files\codex"
     }
 }
 
