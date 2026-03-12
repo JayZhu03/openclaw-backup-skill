@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.1] - 2026-03-12
+
+### Fixed
+- 修复 Windows PowerShell 脚本函数名冲突（Write-Error → Write-Failure）
+- 修复 Windows 脚本文件编码问题（转换为 UTF-8 with BOM）
+- 解决中文字符显示乱码问题
+
 ## [1.3.0] - 2026-03-12
 
 ### Added

@@ -13,7 +13,7 @@
 > - 或完整恢复：`cp -r ~/.openclaw-backup-safety-*/* ~/.openclaw/`
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/version-1.3.0-blue.svg)](https://github.com/JayZhu03/openclaw-backup-skill)
+[![Version](https://img.shields.io/badge/version-1.3.1-blue.svg)](https://github.com/JayZhu03/openclaw-backup-skill)
 
 自动备份 OpenClaw 配置到 GitHub 私有仓库，支持版本管理和一键恢复。
 
