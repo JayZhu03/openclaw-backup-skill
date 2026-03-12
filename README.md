@@ -26,12 +26,17 @@
 
 ### 1. 安装
 
-```bash
-# 通过 skillhub（国内优化）
-skillhub install openclaw-backup
+**方式 1：通过 OpenClaw AI 安装（推荐）**
 
-# 或通过 clawhub
-clawhub install openclaw-backup
+对 OpenClaw 说：
+```
+请安装 https://github.com/JayZhu03/openclaw-backup-skill 这个 skill
+```
+
+**方式 2：手动克隆**
+
+```bash
+git clone https://github.com/JayZhu03/openclaw-backup-skill.git ~/.openclaw/workspace/skills/openclaw-backup-skill
 ```
 
 ### 2. 初始化
