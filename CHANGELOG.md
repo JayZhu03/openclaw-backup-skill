@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2026-03-12
+
+### Added
+- AI 引导式配置（适合聊天软件用户）
+- 路径自动检测（OpenClaw/Claude Code/Codex）
+- 非交互式模式（支持命令行参数）
+- SSH 密钥验证
+- 仓库可见性检查（警告公开仓库）
+- 三种初始化方式（AI 引导/交互式/命令行）
+
+### Fixed
+- JSON 解析问题（使用 Python + grep 回退）
+- Git insteadOf 规则冲突处理
+- 仓库可见性检查逻辑（正确处理 404）
+
+### Changed
+- 优化 SKILL.md 文档
+- 更新 README.md 添加三种初始化方式说明
+- 改进错误处理和用户反馈
+
 ## [1.0.0] - 2026-03-12
 
 ### Added
