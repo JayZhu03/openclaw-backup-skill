@@ -18,9 +18,10 @@
 - 已配置 GitHub SSH key
 
 ### Windows
-- Git Bash（推荐）或 WSL
+- PowerShell 5.0+（Windows 10+ 自带）
 - Git 2.0+
 - 已配置 GitHub SSH key
+- **注意：脚本会自动使用 PowerShell 版本，无需 WSL 或 Git Bash**
 
 ## 快速开始
 
@@ -119,10 +120,11 @@ bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/rollback.sh <com
 ## 常见问题
 
 ### Q: Windows 用户如何使用？
-A: 必须使用 Git Bash 或 WSL。在 Git Bash 中：
-- 路径使用 Unix 风格（`/c/Users/...` 而不是 `C:\Users\...`）
-- 运行脚本：`bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/backup.sh`
-- 注意：Windows 环境未经充分测试，可能存在兼容性问题
+A: Windows 用户使用 PowerShell 脚本，无需 WSL 或 Git Bash：
+- 直接运行：`powershell scripts\windows\backup.ps1`
+- 或使用包装脚本：`.\backup`（自动选择 PowerShell 版本）
+- 路径使用 Windows 风格（`C:\Users\...`）
+- 需要 PowerShell 5.0+（Windows 10+ 自带）
 
 ### Q: 如果 OpenClaw/Claude Code/Codex 安装路径不是默认路径怎么办？
 A: 脚本会自动检测常见路径，如果检测失败：

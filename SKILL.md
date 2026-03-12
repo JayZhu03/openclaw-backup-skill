@@ -176,10 +176,27 @@ bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/init.sh \
 
 ## 核心功能
 
+**跨平台支持：**
+- 脚本会自动检测操作系统
+- Linux/macOS：使用 bash 脚本（`scripts/unix/`）
+- Windows：使用 PowerShell 脚本（`scripts/windows/`）
+- 使用统一的包装脚本，无需手动选择
+
 ### 执行备份
 
+**Linux/macOS：**
 ```bash
-bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/backup.sh
+bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/unix/backup.sh
+```
+
+**Windows：**
+```powershell
+powershell ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/windows/backup.ps1
+```
+
+**自动选择（推荐）：**
+```bash
+~/.openclaw/workspace/skills/openclaw-backup-skill/backup
 ```
 
 自动完成：

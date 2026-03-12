@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2026-03-12
+
+### Added
+- **Windows 原生支持**（PowerShell 脚本）
+- 自动检测操作系统并选择对应脚本
+- 统一的包装脚本（backup/init/status/history/restore/rollback）
+- Windows 路径自动处理（`C:\Users\...`）
+
+### Changed
+- 重构脚本目录结构：`scripts/unix/` 和 `scripts/windows/`
+- 更新文档说明 Windows 使用方式
+
 ## [1.1.0] - 2026-03-12
 
 ### Added

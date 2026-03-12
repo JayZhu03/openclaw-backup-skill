@@ -1,0 +1,12 @@
+#!/bin/bash
+# Auto-detect OS and run appropriate backup script
+
+SKILL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" ]]; then
+    # Windows (Git Bash)
+    powershell.exe -ExecutionPolicy Bypass -File "$SKILL_DIR/scripts/windows/backup.ps1"
+else
+    # Linux/macOS
+    bash "$SKILL_DIR/scripts/unix/backup.sh"
+fi

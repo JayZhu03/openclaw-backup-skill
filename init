@@ -1,0 +1,7 @@
+#!/bin/bash
+SKILL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" ]]; then
+    powershell.exe -ExecutionPolicy Bypass -File "$SKILL_DIR/scripts/windows/init.ps1"
+else
+    bash "$SKILL_DIR/scripts/unix/init.sh"
+fi
