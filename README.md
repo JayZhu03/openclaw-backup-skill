@@ -2,10 +2,15 @@
 
 > ⚠️ **重要警告** ⚠️  
 > **恢复操作会覆盖当前配置！备份中的敏感信息已脱敏（Token 等变成 `<REDACTED>`），直接恢复会导致 OpenClaw 无法启动！**  
+> 
 > **恢复前请务必：**
 > 1. 确认你有原始的 Token 等敏感信息
-> 2. 恢复后立即手动填写 Token 等敏感信息
-> 3. 如果恢复后出问题，可以从安全备份恢复（脚本会自动创建）
+> 2. 恢复后立即手动填写 Token 等敏感信息到 `~/.openclaw/openclaw.json`
+> 
+> **如果恢复后出问题：**
+> - 脚本会自动创建安全备份到 `~/.openclaw-backup-safety-时间戳/`
+> - 恢复方法：`cp -r ~/.openclaw-backup-safety-*/openclaw.json ~/.openclaw/`
+> - 或完整恢复：`cp -r ~/.openclaw-backup-safety-*/* ~/.openclaw/`
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Version](https://img.shields.io/badge/version-1.2.1-blue.svg)](https://github.com/JayZhu03/openclaw-backup-skill)
