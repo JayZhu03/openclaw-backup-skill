@@ -63,14 +63,28 @@ if [[ "$REPO_URL" =~ github.com[:/]([^/]+)/([^/.]+) ]]; then
     REPO_OWNER="${BASH_REMATCH[1]}"
     REPO_NAME="${BASH_REMATCH[2]}"
     
-    # 检查仓库是否公开
-    if curl -s "https://api.github.com/repos/$REPO_OWNER/$REPO_NAME" | grep -q '"private": false'; then
+    # 检查仓库可见性
+    REPO_INFO=$(curl -s "https://api.github.com/repos/$REPO_OWNER/$REPO_NAME")
+    
+    if echo "$REPO_INFO" | grep -q '"private": false'; then
+        # 明确检测到公开仓库
         echo "🚨 严重警告：检测到公开仓库！"
         echo "备份包含敏感信息（Token、API Key 等），即使脱敏也可能有遗漏"
         echo "强烈建议使用私有仓库！"
         echo ""
         echo "是否继续？(yes/no)"
         # 等待用户确认
+    elif echo "$REPO_INFO" | grep -q '"private": true'; then
+        # 私有仓库（已授权访问）
+        echo "✅ 检测到私有仓库"
+    else
+        # 404 或其他错误 - 可能是不存在或私有仓库（未授权）
+        echo "⚠️ 无法验证仓库可见性（可能是私有仓库或不存在）"
+        echo "请手动确认："
+        echo "  - 如果仓库已存在，确保它是私有的"
+        echo "  - 如果是新仓库，创建时选择私有"
+        echo ""
+        echo "确认后继续配置"
     fi
 fi
 ```
