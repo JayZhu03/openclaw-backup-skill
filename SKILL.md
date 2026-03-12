@@ -231,6 +231,29 @@ bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/history.sh
 
 ### 恢复配置
 
+**⚠️ AI 执行前必须确认：**
+
+当用户要求恢复配置时，AI 必须：
+1. 先警告用户风险
+2. 等待用户明确确认（用户回复"确认"或"yes"）
+3. 再执行恢复脚本
+
+**警告模板：**
+```
+⚠️ 警告：恢复操作有严重风险！
+
+备份中的敏感信息已脱敏（Token 等变成 <REDACTED>）
+直接恢复会导致 OpenClaw 无法启动！
+
+恢复后你需要：
+1. 手动编辑 openclaw.json
+2. 填写正确的 Token、API Key 等敏感信息
+
+是否确认恢复？请回复"确认"
+```
+
+**只有用户明确回复"确认"后，才能执行：**
+
 ```bash
 # 恢复所有配置
 bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/restore.sh --all
