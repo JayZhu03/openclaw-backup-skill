@@ -1,6 +1,8 @@
 ﻿# OpenClaw Backup History Script for Windows
 # PowerShell version
 
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+
 $BACKUP_DIR = "$env:USERPROFILE\openclaw-backup"
 
 if (-not (Test-Path "$BACKUP_DIR\.git")) {

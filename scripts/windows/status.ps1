@@ -1,6 +1,8 @@
 ﻿# OpenClaw Backup Status Script for Windows
 # PowerShell version
 
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+
 $CONFIG_DIR = "$env:USERPROFILE\.openclaw-backup"
 $CONFIG_FILE = "$CONFIG_DIR\config.json"
 $BACKUP_DIR = "$env:USERPROFILE\openclaw-backup"
