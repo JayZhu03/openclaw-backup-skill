@@ -3,9 +3,9 @@
 > ⚠️ **重要警告** ⚠️  
 > **恢复操作会覆盖当前配置！备份中的敏感信息已脱敏（Token 等变成 `<REDACTED>`），直接恢复会导致 OpenClaw 无法启动！**  
 > **恢复前请务必：**
-> 1. 手动备份当前配置
-> 2. 恢复后手动填写 Token 等敏感信息
-> 3. 或使用 `rollback` 回滚到恢复前的状态
+> 1. 确认你有原始的 Token 等敏感信息
+> 2. 恢复后立即手动填写 Token 等敏感信息
+> 3. 如果恢复后出问题，可以从安全备份恢复（脚本会自动创建）
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Version](https://img.shields.io/badge/version-1.2.1-blue.svg)](https://github.com/JayZhu03/openclaw-backup-skill)
@@ -83,12 +83,20 @@ bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/unix/init.sh \
 
 ### 3. 使用
 
+**通过 AI 对话（推荐）**
+
+直接对 OpenClaw 说：
+- "备份" 或 "执行备份" - 执行备份
+- "备份状态" 或 "查看备份状态" - 查看状态
+- "备份历史" - 查看历史记录
+- "恢复配置" - 恢复（会先警告风险）
+
+**通过命令行**
+
 **执行备份**
 ```bash
 # 自动选择脚本（推荐）
 ~/.openclaw/workspace/skills/openclaw-backup-skill/backup
-
-# 或直接对 OpenClaw 说："备份"
 ```
 
 **查看状态**
@@ -130,13 +138,43 @@ bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/unix/init.sh \
 
 ```json
 {
-  "repository": "git@github.com:username/openclaw-backup.git",
-  "branch": "main",
+  "repository": "git@github.com:username/openclaw-backup.git",  // GitHub 仓库地址（SSH 格式推荐）
+  "branch": "main",  // Git 分支名称
   "backup_items": {
-    "openclaw_config": { "enabled": true },
-    "workspace": { "enabled": true },
-    "claude_code": { "enabled": false },
-    "codex": { "enabled": false }
+    "openclaw_config": {
+      "enabled": true,  // 是否备份 OpenClaw 主配置（必选）
+      "path": "~/.openclaw/openclaw.json",  // 配置文件路径
+      "required": true  // 是否为必需项
+    },
+    "workspace": {
+      "enabled": true,  // 是否备份 Workspace 工作空间（必选）
+      "path": "~/.openclaw/workspace/",  // Workspace 路径
+      "required": true,  // 是否为必需项
+      "exclude": ["node_modules", "*.log", ".DS_Store", "skills"]  // 排除的文件/目录
+    },
+    "claude_code": {
+      "enabled": false,  // 是否备份 Claude Code 配置（可选）
+      "path": "~/.claude/",  // Claude Code 配置路径
+      "required": false  // 是否为必需项
+    },
+    "codex": {
+      "enabled": false,  // 是否备份 Codex 配置（可选）
+      "path": "~/.codex/",  // Codex 配置路径
+      "required": false  // 是否为必需项
+    },
+    "systemd": {
+      "enabled": false,  // 是否备份 systemd 服务文件（可选，仅 Linux）
+      "path": "~/.config/systemd/user/openclaw-*.service",  // systemd 服务文件路径
+      "required": false  // 是否为必需项
+    }
+  },
+  "desensitize": {
+    "enabled": true,  // 是否启用脱敏（强烈推荐）
+    "rules_file": "~/.openclaw-backup/desensitize.json"  // 脱敏规则文件路径
+  },
+  "git": {
+    "auto_commit": true,  // 是否自动提交到 Git
+    "auto_push": true  // 是否自动推送到 GitHub
   }
 }
 ```
