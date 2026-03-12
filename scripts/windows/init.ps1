@@ -7,7 +7,7 @@ $CONFIG_DIR = "$env:USERPROFILE\.openclaw-backup"
 $CONFIG_FILE = "$CONFIG_DIR\config.json"
 
 function Write-Success { Write-Host "✅ $args" -ForegroundColor Green }
-function Write-Error { Write-Host "❌ $args" -ForegroundColor Red }
+function Write-Failure { Write-Host "❌ $args" -ForegroundColor Red }
 function Write-Info { Write-Host "  → $args" -ForegroundColor Cyan }
 
 Write-Host "🔧 OpenClaw Backup 初始化向导"

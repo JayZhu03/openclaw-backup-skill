@@ -13,12 +13,12 @@ $BACKUP_DIR = "$env:USERPROFILE\openclaw-backup"
 
 # Colors
 function Write-Success { Write-Host "✅ $args" -ForegroundColor Green }
-function Write-Error { Write-Host "❌ $args" -ForegroundColor Red }
+function Write-Failure { Write-Host "❌ $args" -ForegroundColor Red }
 function Write-Info { Write-Host "  → $args" -ForegroundColor Cyan }
 
 # Check if config exists
 if (-not (Test-Path $CONFIG_FILE)) {
-    Write-Error "配置文件不存在: $CONFIG_FILE"
+    Write-Failure "配置文件不存在: $CONFIG_FILE"
     Write-Host "请先运行 init.ps1 初始化配置"
     exit 1
 }

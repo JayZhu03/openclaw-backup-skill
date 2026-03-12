@@ -7,12 +7,12 @@ $BACKUP_DIR = "$env:USERPROFILE\openclaw-backup"
 $SAFETY_BACKUP = "$env:USERPROFILE\.openclaw-backup-safety-$(Get-Date -Format 'yyyyMMdd-HHmmss')"
 
 function Write-Success { Write-Host "✅ $args" -ForegroundColor Green }
-function Write-Error { Write-Host "❌ $args" -ForegroundColor Red }
+function Write-Failure { Write-Host "❌ $args" -ForegroundColor Red }
 function Write-Warning { Write-Host "⚠️  $args" -ForegroundColor Yellow }
 function Write-Info { Write-Host "  → $args" -ForegroundColor Cyan }
 
 if (-not (Test-Path "$BACKUP_DIR\.git")) {
-    Write-Error "备份仓库不存在"
+    Write-Failure "备份仓库不存在"
     exit 1
 }
 

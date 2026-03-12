@@ -10,11 +10,11 @@ $ErrorActionPreference = "Stop"
 $BACKUP_DIR = "$env:USERPROFILE\openclaw-backup"
 
 function Write-Success { Write-Host "✅ $args" -ForegroundColor Green }
-function Write-Error { Write-Host "❌ $args" -ForegroundColor Red }
+function Write-Failure { Write-Host "❌ $args" -ForegroundColor Red }
 function Write-Warning { Write-Host "⚠️  $args" -ForegroundColor Yellow }
 
 if (-not (Test-Path "$BACKUP_DIR\.git")) {
-    Write-Error "备份仓库不存在"
+    Write-Failure "备份仓库不存在"
     exit 1
 }
 
