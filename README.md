@@ -41,11 +41,37 @@ git clone https://github.com/JayZhu03/openclaw-backup-skill.git ~/.openclaw/work
 
 ### 2. 初始化
 
+有三种初始化方式，选择最适合你的：
+
+**方式 1：AI 引导配置（推荐，适合聊天软件用户）**
+
+对 OpenClaw 说：
+```
+帮我初始化 openclaw-backup，
+仓库地址是 git@github.com:你的用户名/仓库名.git，
+需要备份 Claude Code 和 Codex
+```
+
+AI 会自动生成配置文件，无需手动操作。
+
+**方式 2：交互式向导（适合终端用户）**
+
 ```bash
 bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/init.sh
 ```
 
-按照交互式向导完成配置。
+按照提示输入配置信息。
+
+**方式 3：命令行参数（适合脚本调用）**
+
+```bash
+bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/init.sh \
+  --repo "git@github.com:username/repo.git" \
+  --claude-code yes \
+  --codex yes \
+  --auto-backup no \
+  --non-interactive
+```
 
 ### 3. 备份
 
