@@ -19,6 +19,7 @@
 1. **GitHub 仓库地址？**
    - 格式：`git@github.com:username/repo.git`（SSH）或 `https://github.com/username/repo.git`（HTTPS）
    - 建议使用 SSH 格式
+   - ⚠️ **必须使用私有仓库**（备份包含敏感信息）
 
 2. **需要备份哪些内容？**
    - OpenClaw 配置（必选）
@@ -31,6 +32,50 @@
    - 不需要
    - 每天凌晨 2:00
    - 每周日凌晨 2:00
+
+### 步骤 1.5: 安全检查（重要）
+
+在生成配置前，执行以下检查：
+
+**1. SSH 密钥检查（如果使用 SSH 格式）**
+```bash
+# 检查 SSH 密钥是否存在
+if [ ! -f ~/.ssh/id_rsa ] && [ ! -f ~/.ssh/id_ed25519 ]; then
+    echo "⚠️ 警告：未检测到 SSH 密钥"
+    echo "请先配置 GitHub SSH 密钥："
+    echo "1. 生成密钥：ssh-keygen -t ed25519 -C 'your_email@example.com'"
+    echo "2. 添加到 GitHub：https://github.com/settings/keys"
+    exit 1
+fi
+
+# 测试 SSH 连接
+ssh -T git@github.com 2>&1 | grep -q "successfully authenticated" || {
+    echo "⚠️ 警告：SSH 连接测试失败"
+    echo "请确保已将 SSH 公钥添加到 GitHub"
+}
+```
+
+**2. 仓库可见性检查**
+```bash
+# 提取仓库信息
+REPO_URL="用户提供的仓库地址"
+if [[ "$REPO_URL" =~ github.com[:/]([^/]+)/([^/.]+) ]]; then
+    REPO_OWNER="${BASH_REMATCH[1]}"
+    REPO_NAME="${BASH_REMATCH[2]}"
+    
+    # 检查仓库是否公开
+    if curl -s "https://api.github.com/repos/$REPO_OWNER/$REPO_NAME" | grep -q '"private": false'; then
+        echo "🚨 严重警告：检测到公开仓库！"
+        echo "备份包含敏感信息（Token、API Key 等），即使脱敏也可能有遗漏"
+        echo "强烈建议使用私有仓库！"
+        echo ""
+        echo "是否继续？(yes/no)"
+        # 等待用户确认
+    fi
+fi
+```
+
+如果检查失败，告诉用户如何修复，然后停止配置流程。
 
 ### 步骤 2: 生成配置
 
