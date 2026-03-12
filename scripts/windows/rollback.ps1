@@ -1,13 +1,12 @@
 ﻿# OpenClaw Backup Rollback Script for Windows
 # PowerShell version
 
-[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-
 param(
     [Parameter(Mandatory=$true)]
     [string]$CommitHash
 )
 
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $ErrorActionPreference = "Stop"
 $BACKUP_DIR = "$env:USERPROFILE\openclaw-backup"
 

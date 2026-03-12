@@ -1,12 +1,11 @@
 ﻿# OpenClaw Backup Script for Windows
 # PowerShell version
 
-[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-
 param(
     [string]$Message = ""
 )
 
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $ErrorActionPreference = "Stop"
 
 $CONFIG_DIR = "$env:USERPROFILE\.openclaw-backup"
