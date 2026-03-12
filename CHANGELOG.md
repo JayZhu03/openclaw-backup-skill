@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.2] - 2026-03-12
+
+### Fixed
+- **严重问题修复**：添加恢复操作警告，防止用户恢复脱敏配置导致 OpenClaw 宕机
+- restore.sh 和 restore.ps1 添加确认提示
+- README 和 SKILL.md 添加醒目警告
+
+### Changed
+- 恢复操作现在需要用户明确确认（输入 yes）
+
 ## [1.2.1] - 2026-03-12
 
 ### Fixed

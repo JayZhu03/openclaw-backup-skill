@@ -3,6 +3,11 @@ set -e
 
 BACKUP_DIR="$HOME/openclaw-backup"
 
+# 颜色
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+
 if [ ! -d "$BACKUP_DIR/.git" ]; then
     echo "❌ 备份仓库不存在，请先执行 backup.sh"
     exit 1
@@ -33,6 +38,24 @@ elif [ "$1" == "--systemd" ]; then
 else
     echo "用法: $0 [--all|--config|--workspace|--claude|--codex|--systemd]"
     exit 1
+fi
+
+# 严重警告
+echo -e "${RED}⚠️  警告：恢复操作有风险！${NC}"
+echo ""
+echo -e "${YELLOW}备份中的敏感信息已脱敏（Token 等变成 <REDACTED>）${NC}"
+echo -e "${YELLOW}直接恢复会导致 OpenClaw 无法启动！${NC}"
+echo ""
+echo "恢复后你需要："
+echo "  1. 手动编辑 openclaw.json"
+echo "  2. 填写正确的 Token、API Key 等敏感信息"
+echo ""
+echo -e "${RED}是否继续？(yes/no)${NC}"
+read -r confirm
+
+if [ "$confirm" != "yes" ]; then
+    echo "已取消恢复"
+    exit 0
 fi
 
 echo "🔄 开始恢复配置..."

@@ -1,5 +1,12 @@
 # OpenClaw Backup Skill
 
+> ⚠️ **重要警告** ⚠️  
+> **恢复操作会覆盖当前配置！备份中的敏感信息已脱敏（Token 等变成 `<REDACTED>`），直接恢复会导致 OpenClaw 无法启动！**  
+> **恢复前请务必：**
+> 1. 手动备份当前配置
+> 2. 恢复后手动填写 Token 等敏感信息
+> 3. 或使用 `rollback` 回滚到恢复前的状态
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Version](https://img.shields.io/badge/version-1.2.1-blue.svg)](https://github.com/JayZhu03/openclaw-backup-skill)
 
