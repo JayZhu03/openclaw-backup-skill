@@ -267,6 +267,29 @@ bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/restore.sh --con
 
 ### 回滚到指定版本
 
+**⚠️ AI 执行前必须确认：**
+
+当用户要求回滚时，AI 必须：
+1. 先警告用户风险（同恢复操作）
+2. 等待用户明确确认
+3. 再执行回滚脚本
+
+**警告模板：**
+```
+⚠️ 警告：回滚操作有严重风险！
+
+回滚的版本中敏感信息已脱敏（Token 等变成 <REDACTED>）
+回滚后会导致 OpenClaw 无法启动！
+
+回滚后你需要：
+1. 手动编辑 openclaw.json
+2. 填写正确的 Token、API Key 等敏感信息
+
+是否确认回滚？请回复"确认"
+```
+
+**只有用户明确回复"确认"后，才能执行：**
+
 ```bash
 bash ~/.openclaw/workspace/skills/openclaw-backup-skill/scripts/rollback.sh <commit-hash>
 ```
