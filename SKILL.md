@@ -5,33 +5,7 @@ description: "自动备份 OpenClaw 配置到 GitHub 私有仓库，支持版本
 
 # OpenClaw Backup Skill
 
-自动备份 OpenClaw 配置到 GitHub 私有仓库，支持版本管理、一键恢复和自定义备份描述。
-
-> ⚠️ **重要警告** ⚠️  
-> **恢复操作会覆盖当前配置！备份中的敏感信息已脱敏（Token 等变成 `<REDACTED>`）**  
-> **直接恢复会导致 OpenClaw 无法启动！恢复后必须手动填写 Token 等敏感信息。**
-
-## 使用场景
-
-- 📦 定期备份 OpenClaw 配置和 Workspace
-- 🔄 版本管理和历史追溯
-- 🛡️ 配置修改前创建安全点
-- 💾 多设备配置同步
-- 🔙 快速恢复到历史版本
-- 📝 重要操作前标记备份（如"更新前的备份"）
-
-## 依赖
-
-### Linux / macOS
-- Git >= 2.0
-- rsync >= 3.0
-- Bash 4.0+
-- SSH 密钥（用于 GitHub）
-
-### Windows
-- Git >= 2.0
-- PowerShell 5.0+
-- SSH 密钥（用于 GitHub）
+> ⚠️ **警告**：恢复操作会覆盖当前配置！备份中的敏感信息已脱敏（Token → `<REDACTED>`），恢复后必须手动填写 Token。
 
 ## 触发条件
 
